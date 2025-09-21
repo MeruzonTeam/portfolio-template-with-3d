@@ -1,0 +1,425 @@
+/*
+   1. Переменные темы
+   2. Reset
+   3. Базовые стили body и контейнера
+   4. Фоновые элементы (градиенты, blur)
+   5. Хедер и навигация
+   6. Главный блок: контент, теги, заголовки, описание, кнопки
+   7. 3D робот (spline-viewer)
+   8. Адаптивность (media queries)
+   9. Карточки и общие стили
+   10. Оптимизация и доступность
+
+   */
+
+
+/* === 1. Переменные темы === */
+:root{
+    --bg: #0f0f10;
+    --panel: #121212;
+    --muted: #9aa0a6;
+    --accent-1: #7f42a7;
+    --accent-2: #6600c5;
+    --glass: rgba(255,255,255,0.03);
+    --radius-lg: 1.25rem;
+    --radius-pill: 50px;
+    --max-width: 1200px;
+    --container-pad: 2rem;
+    --text: #ffffff;
+    --shadow-soft: 0 6px 30px rgba(2,6,23,0.6);
+}
+
+
+/* === 2. Reset === */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* === 3. Body и контейнер === */
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Open Sans", "Noto Sans", Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    line-height: 1.5;
+    overflow-x: hidden;
+    transition: background-color .2s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 calc(var(--container-pad) + 1rem);
+    position: relative;
+    overflow: visible;
+}
+
+
+/* === 4. Фоновые элементы === */
+.image-gradient {
+    position: absolute;
+    top: -5%;
+    right: -8%;
+    width: clamp(200px, 28vw, 520px);
+    height: clamp(200px, 28vw, 520px);
+    object-fit: cover;
+    opacity: 0.55;
+    filter: blur(30px) saturate(120%);
+    transform: rotate(-12deg);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.layer-blur {
+    position: absolute;
+    right: -10%;
+    top: 18%;
+    width: clamp(220px, 36vw, 700px);
+    height: clamp(220px, 36vw, 700px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 20%, rgba(127,66,167,0.18), rgba(83,0,160,0.12) 20%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.06), transparent 40%);
+    filter: blur(60px);
+    transform: rotate(-30deg);
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* === 5. Хедер и навигация === */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem calc(var(--container-pad) + 2rem);
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: clamp(1.25rem, 2.1vw, 3rem);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--text);
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 2.25rem;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+nav a {
+    font-size: .95rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color .18s ease, transform .18s ease;
+    z-index: 11;
+}
+
+nav a:hover,
+nav a:focus {
+    color: var(--text);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.btn-signin {
+    background-color: var(--muted);
+    color: #0b0b0b;
+    padding: .6rem 1.2rem;
+    border-radius: var(--radius-pill);
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .14s ease, background-color .14s ease;
+    z-index: 11;
+}
+
+.btn-signin:hover,
+.btn-signin:focus {
+    background-color: #ffffff;
+    transform: translateY(-2px);
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(127,66,167,0.25);
+    outline-offset: 3px;
+}
+
+
+/* === 6. Главный блок === */
+main {
+    display: flex;
+    align-items: center;
+    min-height: calc(90vh - 6rem);
+    padding: 1.5rem 0;
+    position: relative;
+}
+
+.content {
+    max-width: 46rem;
+    margin-left: -20%;
+    position: relative;
+    z-index: 12;
+}
+
+.tag-box {
+    position: relative;
+    width: 18rem;
+    height: 2.5rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, #656565 0%, var(--accent-1) 20%, var(--accent-2) 40%, #5300a0 60%, #757575 80%);
+    background-size: 200% 100%;
+    animation: gradientShift 3.5s linear infinite;
+    box-shadow: 0 6px 40px rgba(83,0,160,0.12);
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    margin-bottom: 1.25rem;
+    will-change: transform;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.tag-box .tag {
+    position: absolute;
+    inset: 3px;
+    background-color: #121212;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 1rem;
+    font-size: 0.95rem;
+    color: #fff;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: 
+        background-color 0.35s ease,
+        transform 0.25s ease,
+        box-shadow 0.35s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tag-box .tag:hover,
+.tag-box .tag:focus {
+    background-color: rgba(83, 0, 160, 0.95);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 6px 14px rgba(83,0,160,0.35);
+}
+
+.content h1 {
+    font-size: clamp(2rem, 4.6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin: 1.2rem 0;
+    line-height: 1.05;
+    text-shadow: 0 6px 30px rgba(0,0,0,0.45);
+    color: var(--text);
+}
+
+.description {
+    font-size: clamp(.95rem, 1.2vw, 1.15rem);
+    letter-spacing: 0.03em;
+    max-width: 40rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: .75rem;
+    align-items: center;
+}
+
+.btn-get-started {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 0.72rem 1.25rem;
+    border-radius: var(--radius-pill);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    background: transparent;
+    transition: background-color .18s ease, transform .14s ease;
+}
+
+.btn-get-started:hover,
+.btn-get-started:focus {
+    background-color: rgba(255,255,255,0.03);
+    transform: translateY(-3px);
+}
+
+.btn-signing-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #e6e6e6;
+    color: #0b0b0b;
+    padding: 0.6rem 2.25rem;
+    border-radius: var(--radius-pill);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transition: transform .14s ease, background-color .14s ease;
+}
+
+.btn-signing-main:hover,
+.btn-signing-main:focus {
+    background-color: #cfcfcf;
+    transform: translateY(-3px);
+}
+
+
+/* === 7. 3D робот === */
+.robot-3d {
+    position: absolute;
+    top: 15%;
+    right: -52%;
+    width: clamp(1000px, 80vw, 1600px);
+    height: auto;
+    transform-origin: center;
+    z-index: 2;
+    pointer-events: none;
+    transition: transform .35s cubic-bezier(.2,.9,.3,1);
+}
+
+spline-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* === 8. Адаптивность === */
+@media (max-width: 1300px) {
+    header {
+        padding: 1rem calc(var(--container-pad) - .5rem);
+    }
+
+    .content {
+        margin-left: 6%;
+        margin-top: 8rem;
+    }
+
+    .robot-3d {
+        right: 2%;
+        top: -10%;
+        transform: scale(.85);
+    }
+}
+
+@media (max-width: 980px) {
+    .container { padding: 0 1.25rem; }
+
+    nav { gap: 1rem; }
+
+    .content { margin-left: 6%; margin-top: 12rem; max-width: 36rem; }
+
+    .tag-box { width: 14rem; height: 2rem; }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem .6rem;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .logo {
+        font-size: 1.05rem;
+    }
+
+    .btn-signin {
+        padding: .55rem 1rem;
+        font-size: .9rem;
+    }
+
+    .content {
+        margin-left: 7%;
+        margin-top: 18rem;
+        max-width: 30rem;
+    }
+
+    .tag-box { width: 12rem; }
+
+    .content h1 {
+        font-size: 2.2rem;
+        line-height: 1.08;
+    }
+
+    .description {
+        font-size: .95rem;
+    }
+
+    .btn-get-started, .btn-signing-main {
+        font-size: .9rem;
+        padding: .6rem 1rem;
+    }
+
+    .robot-3d {
+        right: 0;
+        top: -30%;
+        transform: scale(.55);
+    }
+}
+
+@media (max-width: 400px) {
+    .content { margin-top: 20rem; margin-left: 5%; max-width: 22rem; }
+    .content h1 { font-size: 1.8rem; }
+    .tag-box { width: 10.5rem; }
+}
+
+
+/* === 9. Карточки === */
+.card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+img, spline-viewer {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}

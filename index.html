@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Портфолио | Рустем</title>
+  <meta name="description" content="Портфолио Рустема — веб-разработчика, создающего современные сайты, интерфейсы и цифровые решения.">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/typing.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+  <img class="image-gradient" src="src\web\gradient.png" alt="gradient">
+  <div class="layer-blur"></div>
+
+  <div class="container">
+    <header>
+      <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">RUSTEM</h1>
+
+      <nav>
+        <a data-aos="fade-down" data-aos-duration="1500" href="#about">ОБО МНЕ</a>
+        <a data-aos="fade-down" data-aos-duration="2000" href="#skills">НАВЫКИ</a>
+        <a data-aos="fade-down" data-aos-duration="2500" href="#projects">ПРОЕКТЫ</a>
+        <a data-aos="fade-down" data-aos-duration="3000" href="#contact">КОНТАКТЫ</a>
+      </nav>
+
+      <button data-aos="fade-down" data-aos-duration="1500" class="btn-signin">СВЯЗАТЬСЯ</button>
+    </header>
+    
+    <main> 
+      <div class="content" id="about">
+        <div data-aos="fade-zoom-in"
+             data-aos-easing="ease-in-back"
+             data-aos-delay="300"
+             data-aos-offset="0" data-aos-duration="1500" 
+             class="tag-box">
+          <div class="tag">МОЁ ПОРТФОЛИО</div>
+        </div>
+
+        <h1 data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-back"
+            data-aos-delay="300"
+            data-aos-offset="0" data-aos-duration="2000">
+          Привет, <br> я являюсь разработчиком.
+        </h1>
+
+        <p data-aos="fade-zoom-in"
+           data-aos-easing="ease-in-back"
+           data-aos-delay="300"
+           data-aos-offset="0" data-aos-duration="2500" 
+           class="description">
+           <span class="typed-container">Я занимаюсь <span id="typed"></span></span>
+        </p>
+
+        <div data-aos="fade-zoom-in"
+             data-aos-easing="ease-in-back"
+             data-aos-delay="300"
+             data-aos-offset="0" data-aos-duration="3000" 
+             class="buttons">
+          <a href="#projects" class="btn-get-started">Посмотреть проекты &gt;</a>
+          <a href="#contact" class="btn-signing-main">Написать мне &gt;</a>
+        </div>
+      </div>
+    </main>
+
+    <spline-viewer data-aos="fade-zoom-in"
+                   data-aos-easing="ease-in-back"
+                   data-aos-delay="300"
+                   data-aos-offset="0" data-aos-duration="3000" 
+                   class="robot-3d" 
+                   url="https://prod.spline.design/jvz6Ms42JmmMnack/scene.splinecode">
+    </spline-viewer>
+  </div>
+
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.64/build/spline-viewer.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="static/scripts/main.js"></script>
+  <script src="static/scripts/typing.js"></script>
+</body>
+</html>
